@@ -22,3 +22,17 @@ jobs:
       # Étape 3 : Lancer la suite de tests
       - name: Run tests
         run: npm test
+      # Optionnel : pour publier les résultats des tests sur GitHub
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v4
+        if: always() # S'exécute même si les tests échouent
+        with:
+          report_paths: 'junit.xml'
+      - name: "Verification Securite et Masquage"
+        env:
+          CURRENT_ENV: ${{ vars.APP_ENVIRONMENT }}
+          SECRET_KEY: ${{ secrets.AWS_SECRET_KEY }}
+        run: |
+          echo "L'environnement actuel est : $CURRENT_ENV"
+          # La clé secrète sera automatiquement masquée par GitHub si elle est bien configurée
+          echo "Tentative d'affichage de la cle secrete : $SECRET_KEY"    
