@@ -2,7 +2,7 @@
 name: Application Pipeline
 
 # Déclencheur : s'active à chaque push sur le dépôt
-onn: [push]
+on: [push]
 
 jobs:
   # Déclaration du job unique
