@@ -1,0 +1,24 @@
+# Nom public du workflow
+name: Application Pipeline
+
+# Déclencheur : s'active à chaque push sur le dépôt
+on: [push]
+
+jobs:
+  # Déclaration du job unique
+  validate-code:
+    # Spécification de l'agent d'écoute (Ubuntu version stable la plus récente)
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Étape 1 : Cloner le code source
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Étape 2 : Installer les dépendances Node.js
+      - name: Install dependencies
+        run: npm install
+
+      # Étape 3 : Lancer la suite de tests
+      - name: Run tests
+        run: npm test
